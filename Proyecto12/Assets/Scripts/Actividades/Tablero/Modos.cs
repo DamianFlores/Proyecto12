@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Modos : MonoBehaviour {
@@ -78,16 +79,10 @@ public class Modos : MonoBehaviour {
         new Longitud("345...", p => true)
     };
 
-    public SelectorOr selectorTemas;
-
-    public bool[] temasActivos = new bool[7];
+    public bool[] temasActivos;
     public int indiceVisibilidad;
     public int indiceLongitud;
-
-    void Start () {
-		
-	}
-
+    
     public void ElegirVisibilidad(int indice)
     {
         indiceVisibilidad = indice;
@@ -98,9 +93,9 @@ public class Modos : MonoBehaviour {
         indiceLongitud = indice;
     }
 
-    public void ElegirTema(int indice)
+    public void ActualizarTemas(SelectorOr selector)
     {
-        temasActivos[indice] = selectorTemas.toggles[indice].isOn;
+        temasActivos = selector.toggles.Select(t => t.isOn).ToArray();
     }
 
     public System.Func<string, bool> condicionLongitud
