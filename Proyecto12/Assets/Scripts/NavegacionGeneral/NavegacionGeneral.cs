@@ -9,15 +9,14 @@ public class NavegacionGeneral : MonoBehaviour {
     public static NavegacionGeneral instancia;
 
     public ModoUso modo;
-    public Pacientes pacientes;
-    public Paciente pacienteActual;
-    public Paciente.Sesion sesionActual;
+    public Sesion sesionActual;
     public GameObject elegirModo;
     public ElegirPaciente elegirPaciente;
     public ElegirPaciente2 elegirPaciente2;
     public PacienteNuevo pacienteNuevo;
     public Actividades actividades;
     public GameObject animoPaciente;
+    public Sesion sesionSO;
 
     private GameObject[] pantallas;
 
@@ -45,8 +44,8 @@ public class NavegacionGeneral : MonoBehaviour {
 
     public void IniciarSesion(Paciente paciente)
     {
-        pacienteActual = paciente;
-        sesionActual = new Paciente.Sesion();
+        sesionActual = Instantiate(sesionSO);
+        sesionActual.Iniciar(paciente);
         AbrirActividades();
         animoPaciente.SetActive(true);
     }
@@ -55,8 +54,7 @@ public class NavegacionGeneral : MonoBehaviour {
     {
         Debug.Log(sesionActual);
         Debug.Log(sesionActual.reacciones);
-        sesionActual.reacciones.Add(
-            new Paciente.Sesion.Reaccion( (ReaccionPaciente) estado, System.DateTime.Now) );
+        sesionActual.RegistrarReaccion(estado);
     }
 
     public void CerrarSesion()
