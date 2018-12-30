@@ -8,7 +8,8 @@ public class PacienteNuevo : MonoBehaviour
     public InputField nombre, apellido;
     public Dropdown anno, mes, dia, genero;
     public InputField padres, diagnostico, observaciones;
-    public Pacientes pacientes;
+
+    public Paciente pacienteSO;
 
     private void Awake()
     {
@@ -21,7 +22,12 @@ public class PacienteNuevo : MonoBehaviour
 
     public void Aceptar()
     {
-        var paciente = new Paciente();
+        GetComponentInParent<NavegacionGeneral>().IniciarSesion(CrearPaciente());
+    }
+    
+    private Paciente CrearPaciente()
+    {
+        var paciente = ScriptableObject.Instantiate(pacienteSO);
         paciente.nombre = nombre.text;
         paciente.apellido = apellido.text;
         paciente.anno = int.Parse(anno.options[anno.value].text);
@@ -31,11 +37,9 @@ public class PacienteNuevo : MonoBehaviour
         paciente.padres = padres.text;
         paciente.diagnostico = diagnostico.text;
         paciente.observaciones = observaciones.text;
-        pacientes.pacientes.Add(paciente);
 
-        Debug.Log(paciente.edad);
-
-        GetComponentInParent<NavegacionGeneral>().IniciarSesion(paciente);
+        Paciente.AgregarPaciente(paciente);
+        return paciente;
     }
 
     public void ActualizarMes()
