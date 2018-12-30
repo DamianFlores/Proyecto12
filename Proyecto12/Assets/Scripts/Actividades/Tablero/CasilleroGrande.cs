@@ -9,16 +9,16 @@ public class CasilleroGrande : MonoBehaviour {
     public Text referencia;
     public Text solucion;
 
-    public Palabra palabra;
+    public Palabra2 palabra;
     public Modos.Visibilidad visibilidad;
 
-    public void Abrir(Palabra palabra, Modos.Visibilidad visibilidad)
+    public void Abrir(Palabra2 palabra, Modos.Visibilidad visibilidad)
     {
         this.palabra = palabra;
         this.visibilidad = visibilidad;
 
         imagen.sprite = palabra.imagen;
-        referencia.text = visibilidad.efecto(palabra.palabra);
+        referencia.text = visibilidad.efecto(palabra.name);
     }
 
     public void UbicarLetra()
