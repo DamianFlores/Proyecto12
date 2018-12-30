@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class ElegirPaciente : MonoBehaviour {
 
-    public Pacientes pacientes;
     public InputField nombre;
 
     public void Aceptar()
     {
-        var p = pacientes.BuscarPorString(nombre.text);
+        var p = Paciente.Busqueda.BuscarPorString(nombre.text);
 
         switch(p.Length)
         {
