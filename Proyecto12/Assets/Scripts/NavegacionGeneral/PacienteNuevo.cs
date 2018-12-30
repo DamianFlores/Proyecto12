@@ -44,7 +44,7 @@ public class PacienteNuevo : MonoBehaviour
 
     public void ActualizarMes()
     {
-        var cantidadDias = System.DateTime.DaysInMonth(annoIndicado, mes.value + 1);
+        var cantidadDias = System.DateTime.DaysInMonth(AnnoIndicado, mes.value + 1);
         var diferencia = cantidadDias - dia.options.Count;
         if (diferencia != 0)
         {
@@ -58,8 +58,5 @@ public class PacienteNuevo : MonoBehaviour
         }
     }
 
-    private int annoIndicado
-    {
-        get { return int.Parse(anno.options[anno.value].text); }
-    }
+    private int AnnoIndicado { get { return int.Parse(anno.options[anno.value].text); } }
 }
