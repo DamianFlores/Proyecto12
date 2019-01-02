@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -110,15 +109,7 @@ public class Paciente : ScriptableObject
 
         public static List<Paciente> Lista
         {
-            get
-            {
-                var r = new List<Paciente>();
-                var paths = Directory.GetFiles("Assets/Prefabs/ScriptableObjects/Pacientes", "*.asset");
-                foreach(string p in paths)
-                    r.Add(AssetDatabase.LoadAssetAtPath<Paciente>(p));
-
-                return r;
-            }
+            get { return UtilsSO.ListarEnCarpeta<Paciente>(PATH); }
         }
 
         public static Paciente[] BuscarPorString(string s)
