@@ -82,7 +82,6 @@
     <Compile Include="Assets\Scripts\Actividades\Tablero\CasilleroGrande.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Dado.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\EjercicioCasillero.cs" />
-    <Compile Include="Assets\Scripts\Actividades\Tablero\LetraArrastrable.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Modos.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Palabras\ArmadorPalabras.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Palabras\CorrectorPalabrasTablero.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="Assets\Scripts\Actividades\Tablero\Palabras\SO_Tema.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Palabras\Variaciones.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Personaje.cs" />
-    <Compile Include="Assets\Scripts\Actividades\Tablero\SlotLetra.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Tablero.cs" />
     <Compile Include="Assets\Scripts\Datos\EstadoTablero.cs" />
     <Compile Include="Assets\Scripts\Datos\Paciente.cs" />
