@@ -52,8 +52,6 @@ public class NavegacionGeneral : MonoBehaviour {
 
     public void RegistrarReaccion(int estado)
     {
-        Debug.Log(sesionActual);
-        Debug.Log(sesionActual.reacciones);
         sesionActual.RegistrarReaccion(estado);
     }
 

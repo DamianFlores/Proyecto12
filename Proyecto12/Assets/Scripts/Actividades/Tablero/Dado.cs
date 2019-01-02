@@ -5,12 +5,9 @@ using UnityEngine.UI;
 
 public class Dado : MonoBehaviour {
 
-    public int valor;
-    public int lados = 6;
-    public float incrementoTiempo;
-    public float tiempoMaximo;
+    public int valor, lados = 6;
+    public float incrementoTiempo, tiempoMaximo;
     public Tablero tablero;
-
     public Text texto;
 
     public void Lanzar()

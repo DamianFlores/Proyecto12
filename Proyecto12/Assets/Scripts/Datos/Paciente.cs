@@ -20,6 +20,28 @@ public class Paciente : ScriptableObject
     
     public System.DateTime fechaNacimiento { get { return new System.DateTime(anno, mes, dia); } }
 
+    public void IngresarValores(
+        string nombre,
+        string apellido,
+        int anno,
+        int mes,
+        int dia,
+        int genero,
+        string padres,
+        string diagnostico,
+        string observaciones)
+    {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.anno = anno;
+        this.mes = mes;
+        this.dia = dia;
+        this.genero = (Genero)genero;
+        this.padres = padres;
+        this.diagnostico = diagnostico;
+        this.observaciones = observaciones;
+    }
+
     public int Edad
     {
         get

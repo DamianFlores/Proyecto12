@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Palabra", menuName = "Palabra", order = 1)]
-public class Palabra2 : ScriptableObject {
-    public string palabra;
+[CreateAssetMenu(fileName = "Palabra", menuName = "Datos/Palabra", order = 1)]
+public class Palabra2 : ScriptableObject
+{
     public Sprite imagen;
-
-    
-    private void Awake()
-    {
-        palabra = name;
-    }
 }
