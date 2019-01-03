@@ -117,9 +117,11 @@ public class Tablero : MonoBehaviour {
 
         if (personaje.indiceActual + dado >= casilleros.Count)
             return;
+    }
 
-        var casillerosAMover = casilleros.GetRange(personaje.indiceActual + 1, dado);
-        personaje.AgregarPasos(casillerosAMover);
+    private void RotacionFinal()
+    {
+
     }
 
     public void ElegirVisibilidad(int indice)
