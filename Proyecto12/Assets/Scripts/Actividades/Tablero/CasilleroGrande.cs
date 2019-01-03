@@ -10,9 +10,9 @@ public class CasilleroGrande : MonoBehaviour {
     public Text solucion;
 
     public Palabra2 palabra;
-    public Modos.Visibilidad visibilidad;
+    public Tablero.Estado.Visibilidad visibilidad;
 
-    public void Abrir(Palabra2 palabra, Modos.Visibilidad visibilidad)
+    public void Abrir(Palabra2 palabra, Tablero.Estado.Visibilidad visibilidad)
     {
         this.palabra = palabra;
         this.visibilidad = visibilidad;
