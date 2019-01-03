@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class Actividades : MonoBehaviour {
 
-    public string nombre;
+    public static Actividades instancia;
+    public string actividadActual;
+
+    private void Awake()
+    {
+        instancia = this;
+    }
 
     private void AbrirActividad(string nombre)
     {
-        this.nombre = nombre;
+        actividadActual = nombre;
         SceneManager.LoadSceneAsync(nombre, LoadSceneMode.Additive);
-        NavegacionGeneral.instancia.gameObject.SetActive(false);
+        EnHub = false;
     }
 
     public void AbrirTablero()
@@ -21,6 +27,15 @@ public class Actividades : MonoBehaviour {
 
     public void CerrarActividad()
     {
-        SceneManager.UnloadSceneAsync(nombre);
+        SceneManager.UnloadSceneAsync(actividadActual);
+        EnHub = true;
+    }
+
+    private bool EnHub
+    {
+        set
+        {
+            NavegacionGeneral.instancia.gameObject.SetActive(value);
+        }
     }
 }
