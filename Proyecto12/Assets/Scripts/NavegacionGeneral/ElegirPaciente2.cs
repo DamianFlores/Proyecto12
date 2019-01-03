@@ -13,12 +13,8 @@ public class ElegirPaciente2 : MonoBehaviour {
         Vaciar();
         gameObject.SetActive(true);
 
-        for(var i = 0; i < pacientes.Length; i++)
-        {
-            var b = Instantiate(botonPrefab, contenido.transform);
-            b.GetComponent<RectTransform>().localPosition = new Vector3(140, -separacion * i, 0f);
-            b.paciente = pacientes[i];
-        }
+        foreach (var p in pacientes)
+            Instantiate(botonPrefab, contenido.transform).paciente = p;
     }
 
     private void Vaciar()
