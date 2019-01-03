@@ -30,9 +30,8 @@ public class Palabras : MonoBehaviour
         if (!inicializado)
             Inicializar();
 
-        var modos = GetComponent<Modos>();
         Debug.Log(palabras.Length);
-        var disponibles = palabras.Where(p => modos.condicionLongitud(p.palabra)).ToArray();
+        var disponibles = palabras.Where(p => Tablero.instancia.estado.CondicionLongitud(p.palabra)).ToArray();
         Debug.Log(disponibles.Length);
         //Debug.Log(disponibles[Random.Range(0, disponibles.Length)]);
     }
