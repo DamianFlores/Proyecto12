@@ -6,4 +6,6 @@ using UnityEngine;
 public class Palabra2 : ScriptableObject
 {
     public Sprite imagen;
+    public List<Variaciones> grupos;
+    public List<SO_Tema> temas;
 }
