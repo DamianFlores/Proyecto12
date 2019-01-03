@@ -14,6 +14,6 @@ public class BotonElegirPaciente : MonoBehaviour {
 
     public void Click()
     {
-        GetComponentInParent<ElegirPaciente2>().Elegir(paciente);
+        NavegacionGeneral.instancia.IniciarSesion(paciente);
     }
 }

@@ -17,7 +17,7 @@ public class ElegirPaciente : MonoBehaviour {
                 Debug.Log("No hay pacientes con ese nombre.");
                 break;
             case 1:
-                GetComponentInParent<NavegacionGeneral>().IniciarSesion(p[0]);
+                NavegacionGeneral.instancia.IniciarSesion(p[0]);
                 break;
             default:
                 NavegacionGeneral.instancia.AbrirElegirPaciente2(p);
