@@ -81,8 +81,6 @@
     <Compile Include="Assets\Scripts\Actividades\Tablero\Casillero.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\CasilleroGrande.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Dado.cs" />
-    <Compile Include="Assets\Scripts\Actividades\Tablero\EjercicioCasillero.cs" />
-    <Compile Include="Assets\Scripts\Actividades\Tablero\Palabras\ArmadorPalabras.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Palabras\CorrectorPalabrasTablero.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Palabras\MB_Cumulo.cs" />
     <Compile Include="Assets\Scripts\Actividades\Tablero\Palabras\MB_Palabra.cs" />

@@ -7,7 +7,7 @@ public class CasilleroGrande : MonoBehaviour {
 
     public Image imagen;
     public Text referencia;
-    public Text solucion;
+    public InputField respuesta;
 
     public Palabra2 palabra;
     public Tablero.Estado.Visibilidad visibilidad;
@@ -21,12 +21,13 @@ public class CasilleroGrande : MonoBehaviour {
         referencia.text = visibilidad.efecto(palabra.name);
     }
 
-    public void UbicarLetra()
+    public void CambiaTextoRespuesta()
     {
-
+        if (respuesta.text.ToUpper() == palabra.name.ToUpper())
+            Completar();
     }
 
-    public void Completar()
+    private void Completar()
     {
 
     }
