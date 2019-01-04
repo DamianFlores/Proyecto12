@@ -19,6 +19,8 @@ public class CasilleroGrande : MonoBehaviour {
 
         imagen.sprite = palabra.imagen;
         referencia.text = visibilidad.efecto(palabra.name);
+
+        gameObject.SetActive(true);
     }
 
     public void CambiaTextoRespuesta()
@@ -29,6 +31,6 @@ public class CasilleroGrande : MonoBehaviour {
 
     private void Completar()
     {
-
+        gameObject.SetActive(false);
     }
 }
