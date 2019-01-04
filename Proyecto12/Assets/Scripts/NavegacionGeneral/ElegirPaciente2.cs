@@ -22,9 +22,4 @@ public class ElegirPaciente2 : MonoBehaviour {
         for (var i = contenido.childCount - 1; i >= 0; i--)
             Destroy(contenido.GetChild(i).gameObject);
     }
-
-    public void Elegir(Paciente paciente)
-    {
-        GetComponentInParent<NavegacionGeneral>().IniciarSesion(paciente);
-    }
 }

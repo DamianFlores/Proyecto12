@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Tablero : MonoBehaviour {
-
+public class Tablero : MonoBehaviour
+{
     [System.Serializable()]
     public class Estado
     {
@@ -68,7 +68,6 @@ public class Tablero : MonoBehaviour {
         public bool[] temasActivos;
         public int indiceVisibilidad, indiceLongitud, casilleroActual;
 
-
         public System.Func<string, bool> CondicionLongitud
         {
             get
@@ -95,28 +94,62 @@ public class Tablero : MonoBehaviour {
 
     private void Awake()
     {
+        instancia = this;
 
-        var posicionAnterior = primerCasillero.transform.position;
-        foreach(var s in segmentos)
-            for(var i = 0; i < s.longitud; i++)
-            {
-                var c = Instantiate(primerCasillero);
-                posicionAnterior = c.transform.position =
-                    posicionAnterior + separacion * Segmento.direccionAVector3[(int)s.direccion];
-                c.transform.parent = transform;
-            }
-        casilleros = GetComponentsInChildren<Casillero>().ToList();
-        for (var i = 0; i < casilleros.Count; i++)
-            casilleros[i].indice = i;
+        x0 = -deltaX * .5f * (cantidadALoAncho - 1);
+        transform.position = new Vector3(transform.position.x, transform.position.y, radio);
+
+        for (var i = 0; i < 3; i++)
+            AgregarCiclo();
     }
 
     public void ResultadoDado(int dado)
     {
-        if (personaje.estado == Personaje.Estado.caminando)
+        if (personaje.estado == Personaje.Estado.caminando
+            || personaje.indiceActual + dado >= casilleros.Count)
             return;
 
-        if (personaje.indiceActual + dado >= casilleros.Count)
-            return;
+        personaje.AgregarPasos(
+            casilleros.GetRange(personaje.indiceActual + 1, dado));
+    }
+
+    private void AgregarCiclo()
+    {
+        var e = ciclos * CasillerosPorCiclo;
+
+        System.Action<int, int> agregarCasillero = (x, y) =>
+        {
+            var c = Instantiate(prefabCasillero);
+            c.indice = e;
+            c.transform.parent = transform;
+            c.transform.localEulerAngles = new Vector3(-deltaAngulo * (ciclos * 4 + y), 0f, 0f);
+            c.transform.localPosition = new Vector3(x0, 0, 0) + Vector3.right * deltaX * x + c.transform.localRotation * Vector3.back * radio;
+
+            casilleros.Add(c);
+            e++;
+        };
+
+        for(var i = 0; i < cantidadALoAncho; i++)
+            agregarCasillero(i, 0);
+
+        agregarCasillero(cantidadALoAncho - 1, 1);
+
+        for (var i = cantidadALoAncho - 1; i >= 0; i--)
+            agregarCasillero(i, 2);
+
+        agregarCasillero(0, 3);
+        
+        ciclos++;
+    }
+
+    private int CasillerosPorCiclo { get { return 2 * (cantidadALoAncho + 1); } }
+
+    private void QuitarCiclo()
+    {
+        for (var i = cantidadALoAncho; i >= 0; i--)
+            Destroy(casilleros[i].gameObject);
+
+        casilleros.RemoveRange(0, cantidadALoAncho + 1);
     }
 
     private void RotacionFinal()

@@ -57,8 +57,8 @@ public class NavegacionGeneral : MonoBehaviour {
 
     public void CerrarSesion()
     {
-        var i = pacientes.pacientes.FindIndex(p => p.nombre == pacienteActual.nombre);
-        pacientes.pacientes[i].historiaSesiones.Add(sesionActual);
+        sesionActual.Cerrar();
+
         AbrirElegirModo();
         animoPaciente.SetActive(false);
     }
