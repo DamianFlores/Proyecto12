@@ -41,7 +41,7 @@ public class Dado : MonoBehaviour {
         int r;
         do
         {
-            r = Random.Range(0, lados) + 1;
+            r = Random.Range(1, lados + 1);
         }
         while (r == numero || r == 7 - numero);
         return r;

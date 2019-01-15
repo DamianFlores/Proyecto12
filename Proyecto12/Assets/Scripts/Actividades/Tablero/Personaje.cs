@@ -12,7 +12,6 @@ public class Personaje : MonoBehaviour {
     private Vector2 velocidad2;
     private List<Casillero> casillerosPendientes;
     public Tablero tablero;
-    public int indiceActual = 0;
 
     private void Awake()
     {
@@ -37,10 +36,9 @@ public class Personaje : MonoBehaviour {
     private void LlegarACasillero()
     {
         transform.position = casillerosPendientes[0].transform.position;
-        indiceActual = casillerosPendientes[0].indice;
         casillerosPendientes.RemoveAt(0);
 
-        if (casillerosPendientes.Count > 1)
+        if (casillerosPendientes.Count > 0)
             Avanzar();
         else
             FinalizarMovimiento();
@@ -50,7 +48,7 @@ public class Personaje : MonoBehaviour {
     {
         Debug.Log("FinalizarMovimiento");
         estado = Estado.quieto;
-        tablero.casilleros[indiceActual].Accionar();
+        tablero.FinalizarMovimiento();
     }
 
     private bool LlegaACasillero

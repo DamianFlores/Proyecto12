@@ -19,6 +19,7 @@ public class CasilleroGrande : MonoBehaviour {
 
         imagen.sprite = palabra.imagen;
         referencia.text = visibilidad.efecto(palabra.name);
+        respuesta.text = "";
 
         gameObject.SetActive(true);
     }

@@ -55,6 +55,11 @@ public class Tablero : MonoBehaviour
                 )
         };
 
+        public bool EstaEnTema(Palabra2 palabra)
+        {
+            return palabra.temas.Any(t => temas.Any(tt => tt.Equals(t)));
+        }
+
         public SO_Tema[] temas;
 
         public Longitud[] longitudes = new Longitud[]
@@ -65,15 +70,26 @@ public class Tablero : MonoBehaviour
             new Longitud("345...", p => true)
         };
 
+        public int
+            indiceCasilleroPersonaje,
+            indiceVisibilidad,
+            indiceLongitud,
+            casilleroActual;
         public bool[] temasActivos;
-        public int indiceVisibilidad, indiceLongitud, casilleroActual;
 
         public System.Func<string, bool> CondicionLongitud
         {
-            get
-            {
-                return longitudes[indiceLongitud].filtro;
-            }
+            get { return longitudes[indiceLongitud].filtro; }
+        }
+
+        public Visibilidad visibilidad
+        {
+            get { return visibilidades[indiceVisibilidad]; }
+        }
+
+        public bool PalabraCumpleCondiciones(Palabra2 palabra)
+        {
+            return CondicionLongitud(palabra.name) && EstaEnTema(palabra);
         }
     }
 
@@ -82,12 +98,13 @@ public class Tablero : MonoBehaviour
     public List<Casillero> casilleros;
     public Personaje personaje;
 
-    [Space(10f)]
+    [Header("Formas y tamaños")]
     public int cantidadALoAncho;
     public float radio, deltaX, deltaAngulo;
 
     [Space(10f)]
     public Casillero prefabCasillero;
+    public CasilleroGrande casilleroGrande;
 
     private int ciclos = 0;
     private float x0;
@@ -106,11 +123,12 @@ public class Tablero : MonoBehaviour
     public void ResultadoDado(int dado)
     {
         if (personaje.estado == Personaje.Estado.caminando
-            || personaje.indiceActual + dado >= casilleros.Count)
+            || estado.indiceCasilleroPersonaje + dado >= casilleros.Count)
             return;
 
         personaje.AgregarPasos(
-            casilleros.GetRange(personaje.indiceActual + 1, dado));
+            casilleros.GetRange(estado.indiceCasilleroPersonaje + 1, dado));
+        estado.indiceCasilleroPersonaje += dado;
     }
 
     private void AgregarCiclo()
@@ -120,7 +138,6 @@ public class Tablero : MonoBehaviour
         System.Action<int, int> agregarCasillero = (x, y) =>
         {
             var c = Instantiate(prefabCasillero);
-            c.indice = e;
             c.transform.parent = transform;
             c.transform.localEulerAngles = new Vector3(-deltaAngulo * (ciclos * 4 + y), 0f, 0f);
             c.transform.localPosition = new Vector3(x0, 0, 0) + Vector3.right * deltaX * x + c.transform.localRotation * Vector3.back * radio;
@@ -146,10 +163,26 @@ public class Tablero : MonoBehaviour
 
     private void QuitarCiclo()
     {
-        for (var i = cantidadALoAncho; i >= 0; i--)
+        for (var i = cantidadALoAncho; i >= 0; i--, estado.indiceCasilleroPersonaje--)
             Destroy(casilleros[i].gameObject);
 
         casilleros.RemoveRange(0, cantidadALoAncho + 1);
+    }
+
+    public void FinalizarMovimiento()
+    {
+        casilleroGrande.Abrir(PalabraAlAzar(), estado.visibilidad);
+    }
+
+    private Palabra2 PalabraAlAzar()
+    {
+        var lista = UtilsSO.ListarEnCarpeta<Palabra2>("Assets/Prefabs/ScriptableObjects/Tablero/Palabras").Where(AplicarFiltro).ToList();
+        return lista[Random.Range(0, lista.Count)];
+    }
+
+    private bool AplicarFiltro(Palabra2 palabra)
+    {
+        return estado.CondicionLongitud(palabra.name) && estado.EstaEnTema(palabra);
     }
 
     private void RotacionFinal()
